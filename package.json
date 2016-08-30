@@ -1,5 +1,5 @@
 {
-  "name": "YNABBA",
+  "name": "ynabba",
   "description": "Building a Betta YNAB with MySql, Express, AngularJS, and Node.js.",
   "version": "0.0.0.0.0",
   "private": false,

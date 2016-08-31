@@ -1,4 +1,4 @@
-# YNABBA
+# YNABBA [![Build Status](https://travis-ci.org/dLopreiato/YNABBA.svg?branch=master)](https://travis-ci.org/dLopreiato/YNABBA)
 _You Need A Better Budgettting Applicaiton_
 
 -------------------------------------------------------------

@@ -41,3 +41,6 @@ typings
 
 # Javascript mapping files
 *.js.map
+
+# Javascript files generated from typescript
+modules/*/client/*.js

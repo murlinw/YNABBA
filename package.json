@@ -14,7 +14,7 @@
     "start": "tsc && concurrently \"tsc -w\" \"lite-server\" ",
     "pree2e": "npm run webdriver:update",
     "e2e": "tsc && concurrently \"http-server -s\" \"protractor protractor.config.js\" --kill-others --success first",
-    "lint": "tslint ./modules/*/client/**/*.ts -t verbose",
+    "lint": "tslint modules/*/client/**/*.ts modules/*/client/*.ts -t verbose",
     "lite": "lite-server",
     "postinstall": "typings install",
     "test-once": "tsc && karma start karma.conf.js --single-run",

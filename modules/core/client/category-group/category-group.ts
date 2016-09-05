@@ -1,4 +1,4 @@
-import {Category} from '../Category/category'
+import {Category} from '../Category/category';
 
 /**
  * Used to define a group of categories
@@ -8,7 +8,7 @@ import {Category} from '../Category/category'
  */
 export class CategoryGroup {
     constructor (
-        public name: String, 
+        public name: String,
         public categories: [Category]
     ) {}
 }

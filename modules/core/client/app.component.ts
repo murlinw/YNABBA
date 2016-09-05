@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { CategoryComponent } from './category/category.component';
-import { CategoryGroupComponent} from './category-group/category-group.component'
+import { CategoryGroupComponent} from './category-group/category-group.component';
 
 @Component({
     moduleId: module.id,

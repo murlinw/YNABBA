@@ -3,7 +3,7 @@ import { CategoryGroup } from './category-group'
 
 @Component({
     moduleId: module.id,
-    selector: 'selector',
+    selector: 'category-group',
     templateUrl: 'category-group.component.html'
 })
 export class CategoryGroupComponent implements OnInit {

@@ -6,8 +6,8 @@ before_script:
   - 'npm run lint'
 
 before_deploy:
-  skip_cleanup: true
   - 'gulp'
 
 deploy:
+  skip_cleanup: true
   provider: azure_web_apps

@@ -42,3 +42,6 @@ typings
 # Javascript mapping files
 *.js.map
 
+# build folder
+build
+

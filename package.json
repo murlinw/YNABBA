@@ -21,7 +21,8 @@
     "tsc": "tsc",
     "tsc:w": "tsc -w",
     "typings": "typings",
-    "webdriver:update": "webdriver-manager update"
+    "webdriver:update": "webdriver-manager update",
+    "win_lint_modules": "for /r \\modules %f in (*.ts) do tslint %f -t verbose"
   },
   "dependencies": {
     "@angular/common": "2.0.0-rc.5",

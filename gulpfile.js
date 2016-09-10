@@ -48,13 +48,13 @@ gulp.task('clean', function (cb) {
 /**
  * Copy all resources that are not TypeScript files into build directory.
  */
-gulp.task("resources", ["server", "tscompile", "assets", "systemjs"], function () {
+gulp.task("resources", ["server", "tscompile", "assets", "systemjs", 'index'], function () {
     console.log("Building resources...");
 });
 
 /* get the index file to the root of the build */
 gulp.task("index", function(){
-    return gulp.src(["index.html"])
+    return gulp.src(["src/index.html"])
         .pipe(gulp.dest("build"));
 });
 /* copy node server to build folder */

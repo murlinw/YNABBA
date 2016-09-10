@@ -6,10 +6,12 @@ var print = require('gulp-print');
 var ts = require('gulp-typescript')
 
 var tsfiles = ['src/app/**/*.ts'];
-var jsfiles = ['src/app/**/*.js', 'src/app/**/*.js.map'];
 
+/**
+ * Compilation of typescript files into javascript
+ */
 gulp.task('tscompile', function () {
-    var tsProject = ts.createProject('tsconfig.json', {
+    var tsProject = ts.createProject('./tsconfig.json', {
         typescript: require('typescript'),
         outFile: 'app.js'
     });
@@ -17,7 +19,16 @@ gulp.task('tscompile', function () {
     var tsResult = tsProject.src(tsfiles)
                             .pipe(ts(tsProject));
 
-    return tsResult.js.pipe(gulp.dest('./build'));
+    return tsResult.js
+            .pipe(print(function(filepath) {
+                return "build: " + filepath;
+            }))
+            .pipe(gulp.dest('./build/app'));
+});
+
+gulp.task('systemjs', function () {
+    return gulp.src('./systemjs.config.js')
+               .pipe(gulp.dest('./build'))
 });
 
 gulp.task('print', function() {
@@ -37,14 +48,10 @@ gulp.task('clean', function (cb) {
 /**
  * Copy all resources that are not TypeScript files into build directory.
  */
-gulp.task("resources", ["server", "app", "assets"], function () {
+gulp.task("resources", ["server", "tscompile", "assets", "systemjs"], function () {
     console.log("Building resources...");
 });
-/* copy the app core files to the build folder */
-gulp.task("app", ['index'], function(){
-    return gulp.src(["src/app/**", "!src/app/**/*.ts"])
-        .pipe(gulp.dest("build/app"));
-});
+
 /* get the index file to the root of the build */
 gulp.task("index", function(){
     return gulp.src(["index.html"])
@@ -65,14 +72,14 @@ gulp.task("assets", function(){
  */
 gulp.task("libs", function () {
     return gulp.src([
-        'es6-shim/es6-shim.min.js',
+        // 'es6-shim/es6-shim.min.js',
         'systemjs/dist/system-polyfills.js',
-        'angular2/bundles/angular2-polyfills.js',
-        'angular2/es6/dev/src/testing/shims_for_IE.js',
+        // 'angular2/bundles/angular2-polyfills.js',
+        // 'angular2/es6/dev/src/testing/shims_for_IE.js',
         'systemjs/dist/system.src.js',
         'rxjs/bundles/Rx.js',
-        'angular2/bundles/angular2.dev.js',
-        'angular2/bundles/router.dev.js'
+        // 'angular2/bundles/angular2.dev.js',
+        // 'angular2/bundles/router.dev.js'
     ], { cwd: "node_modules/**" }) /* Glob required here. */
         .pipe(gulp.dest("build/node_modules"));
 });

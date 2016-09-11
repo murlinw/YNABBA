@@ -93,11 +93,12 @@ gulp.task("assets", function(){
 gulp.task("libs", function () {
     return gulp.src([
         'core-js/client/shim.min.js',
-        'zone.js/dist/zone.js',
+        'zone.js/dist/zone.min.js',
         'reflect-metadata/Reflect.js',
         'systemjs/dist/system.src.js',
     ], { cwd: "node_modules/**" }) /* Glob required here. */
         .pipe(concat('vender.js'))
+        .pipe(minify())
         .pipe(gulp.dest("build/libs"));
 });
 /**

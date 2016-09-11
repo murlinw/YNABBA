@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-    moduleId: module.id,
     selector: 'category',
-    templateUrl: 'category.component.html'
+    templateUrl: 'app/category/category.component.html'
 })
 
 export class CategoryComponent implements OnInit {

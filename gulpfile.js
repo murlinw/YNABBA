@@ -30,7 +30,7 @@ gulp.task('tscompile', function () {
 gulp.task('jspm_bundle', ['tscompile'], function () {
     return jspm({
         bundleOptions: {
-            minify: false,
+            minify: true,
             mangle: false
         },
         bundleSfx: true,
@@ -39,7 +39,7 @@ gulp.task('jspm_bundle', ['tscompile'], function () {
         ],
         config: 'config.js'
     })
-    .pipe(gulp.dest('build'))
+    .pipe(gulp.dest('build/libs'))
 });
 
 gulp.task('print', function() {

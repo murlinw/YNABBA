@@ -53,7 +53,12 @@
 
   var config = {
     map: map,
-    packages: packages
+    packages: packages,
+    typescriptOptions: {
+       module: "commonjs",
+       emitDecoratorMetadata: true,
+       experimentalDecorators: true
+    }
   };
 
   System.config(config);

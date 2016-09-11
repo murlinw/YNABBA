@@ -21,7 +21,7 @@ gulp.task('tscompile', function () {
     });
     var tsResult = tsProject.src(tsfiles)
                             .pipe(ts(tsProject));
-    return tsResult.js;
+    return tsResult.js.pipe(gulp.dest('.'));
 });
 
 /**

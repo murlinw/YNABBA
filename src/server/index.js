@@ -1,12 +1,14 @@
 var express = require('express'),
     path = require('path'),
     fs = require('fs');
+var compression = require('compression');
 
 var app = express();
 var staticRoot = __dirname + '/';
 
 app.set('port', (process.env.PORT || 3000));
 
+app.use(compression());
 app.use(express.static(staticRoot));
 
 app.use(function(req, res, next){

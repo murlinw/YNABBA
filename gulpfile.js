@@ -6,8 +6,9 @@ var print = require('gulp-print');
 var ts = require('gulp-typescript')
 var jspm = require('gulp-jspm-build');
 var concat = require('gulp-concat');
-var uglyify = require("gulp-uglify");
+var uglify = require("gulp-uglify");
 var minify = require("gulp-minify");
+
 
 var tsfiles = ['src/app/**/*.ts'];
 var htmlfiles = ['src/app/**/*.html'];
@@ -97,9 +98,9 @@ gulp.task("libs", function () {
         'reflect-metadata/Reflect.js',
         'systemjs/dist/system.src.js',
     ], { cwd: "node_modules/**" }) /* Glob required here. */
-        .pipe(concat('vender.js'))
-        .pipe(minify())
-        .pipe(gulp.dest("build/libs"));
+        .pipe(concat("vender.min.js"))
+        .pipe(uglify())
+        .pipe(gulp.dest("build/libs/"))
 });
 /**
  * Build the project.

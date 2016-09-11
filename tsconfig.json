@@ -12,13 +12,14 @@
     "declaration": false,
     "stripInternal": true,
 
-    "module": "system",
+    "module": "commonjs",
     "noEmitOnError": false,
     "rootDir": ".",
     "inlineSourceMap": true,
     "inlineSources": true
   },
   "exclude" : [
-    "node_modules"
+    "node_modules",
+    "build"
   ]
 }

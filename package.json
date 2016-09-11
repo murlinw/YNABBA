@@ -54,6 +54,11 @@
     "gulp-sourcemaps": "2.0.0-alpha",
     "del" : "2.2.0",
     "gulp-print" : "2.0.1",
-    "gulp-typescript" : "2.13.6"
+    "gulp-typescript" : "2.13.6",
+    "gulp-jspm-build" : "0.0.15",
+    "gulp-concat": "2.6.0",
+    "gulp-uglify": "2.0.0",
+    "gulp-minify": "0.0.14",
+    "pump": "1.0.1"
   }
 }

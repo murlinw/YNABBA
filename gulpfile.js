@@ -4,35 +4,46 @@ var del = require("del");
 var sourcemaps = require('gulp-sourcemaps');
 var print = require('gulp-print');
 var ts = require('gulp-typescript')
+var jspm = require('gulp-jspm-build');
+var concat = require('gulp-concat');
+var uglyify = require("gulp-uglify");
+var minify = require("gulp-minify");
 
 var tsfiles = ['src/app/**/*.ts'];
+var htmlfiles = ['src/app/**/*.html'];
 
 /**
  * Compilation of typescript files into javascript
  */
 gulp.task('tscompile', function () {
     var tsProject = ts.createProject('./tsconfig.json', {
-        typescript: require('typescript'),
-        outFile: 'app.js'
+        typescript: require('typescript')
     });
-
     var tsResult = tsProject.src(tsfiles)
                             .pipe(ts(tsProject));
-
-    return tsResult.js
-            .pipe(print(function(filepath) {
-                return "build: " + filepath;
-            }))
-            .pipe(gulp.dest('./build/app'));
+    return tsResult.js;
 });
 
-gulp.task('systemjs', function () {
-    return gulp.src('./systemjs.config.js')
-               .pipe(gulp.dest('./build'))
+/**
+ * Bundles our app with angular components and our components
+ */
+gulp.task('jspm_bundle', ['tscompile'], function () {
+    return jspm({
+        bundleOptions: {
+            minify: true,
+            mangle: false
+        },
+        bundleSfx: true,
+        bundles: [
+            { src: './src/app/app.js', dst: 'bundle.min.js'}
+        ],
+        config: 'config.js'
+    })
+    .pipe(gulp.dest('build/app'))
 });
 
 gulp.task('print', function() {
-  gulp.src(tsfiles)
+  gulp.src(htmlfiles)
     .pipe(print(function(filepath) {
       return "built: " + filepath;
     }))
@@ -48,8 +59,17 @@ gulp.task('clean', function (cb) {
 /**
  * Copy all resources that are not TypeScript files into build directory.
  */
-gulp.task("resources", ["server", "tscompile", "assets", "systemjs", 'index'], function () {
+gulp.task("resources", ["server", 'jspm_bundle' , "assets", 'static_resources'], function () {
     console.log("Building resources...");
+});
+
+/**
+ * Task to copy static resources to the build folder
+ * (index.html and other html files)
+ */
+gulp.task("static_resources", ["index"], function () {
+    return gulp.src(htmlfiles)
+                .pipe(gulp.dest("build/app"));
 });
 
 /* get the index file to the root of the build */
@@ -72,16 +92,13 @@ gulp.task("assets", function(){
  */
 gulp.task("libs", function () {
     return gulp.src([
-        // 'es6-shim/es6-shim.min.js',
-        'systemjs/dist/system-polyfills.js',
-        // 'angular2/bundles/angular2-polyfills.js',
-        // 'angular2/es6/dev/src/testing/shims_for_IE.js',
+        'core-js/client/shim.min.js',
+        'zone.js/dist/zone.js',
+        'reflect-metadata/Reflect.js',
         'systemjs/dist/system.src.js',
-        'rxjs/bundles/Rx.js',
-        // 'angular2/bundles/angular2.dev.js',
-        // 'angular2/bundles/router.dev.js'
     ], { cwd: "node_modules/**" }) /* Glob required here. */
-        .pipe(gulp.dest("build/node_modules"));
+        .pipe(concat('vender.js'))
+        .pipe(gulp.dest("build/libs"));
 });
 /**
  * Build the project.

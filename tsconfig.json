@@ -15,7 +15,6 @@
     "module": "commonjs",
     "noEmitOnError": false,
     "rootDir": ".",
-    "inlineSourceMap": true,
     "inlineSources": true
   },
   "exclude" : [

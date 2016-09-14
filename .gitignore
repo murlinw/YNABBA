@@ -45,3 +45,5 @@ typings
 # build folder
 build
 
+# VS Code files
+.vscode

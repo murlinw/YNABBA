@@ -3,11 +3,26 @@
     <title>Angular 2 QuickStart</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" type="text/css" href="styles.css">
 
-    <script src="libs/vender.min.js"></script>
-    <script src="libs/bundle.min.js"></script>
-    <script src="libs/config.js"></script>
+    <!-- build:css -->
+    <link rel="stylesheet" type="text/css" href="styles.css">
+    <!-- endbuild -->
+
+    <!-- build:js -->
+    <!-- Polyfill(s) for older browsers -->
+    <script src="node_modules/core-js/client/shim.min.js"></script>
+
+    <script src="node_modules/zone.js/dist/zone.js"></script>
+    <script src="node_modules/reflect-metadata/Reflect.js"></script>
+    <script src="node_modules/systemjs/dist/system.src.js"></script>
+    <!-- endbuild -->
+
+    <!-- build:systemjs -->
+    <script src="config.js"></script>
+    <!-- endbuild -->
+    <script>
+      System.import('app').catch(function(err){ console.error(err); });
+    </script>
 
   </head>
 

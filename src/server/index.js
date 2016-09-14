@@ -9,7 +9,17 @@ var staticRoot = __dirname + '/';
 app.set('port', (process.env.PORT || 3000));
 
 app.use(compression());
-app.use(express.static(staticRoot));
+
+if (process.env.ENV === 'PROD') {
+    app.use(express.static(staticRoot))
+} else {
+    app.use('/app', express.static(staticRoot + '../app'));
+    app.use(express.static(staticRoot + '../../'));
+}
+
+app.use('/test', function(req,res,next) {
+    res.send("Testing Server");
+});
 
 app.use(function(req, res, next){
 
@@ -25,7 +35,7 @@ app.use(function(req, res, next){
         return next();
     }
 
-    fs.createReadStream(staticRoot + 'index.html').pipe(res);
+    fs.createReadStream(staticRoot + '../index.html').pipe(res);
 
 });
 

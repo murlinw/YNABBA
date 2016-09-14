@@ -8,7 +8,7 @@ var jspm = require('gulp-jspm-build');
 var concat = require('gulp-concat');
 var uglify = require("gulp-uglify");
 var minify = require("gulp-minify");
-
+var htmlreplace = require('gulp-html-replace');
 
 var tsfiles = ['src/app/**/*.ts'];
 var htmlfiles = ['src/app/**/*.html'];
@@ -17,7 +17,7 @@ var htmlfiles = ['src/app/**/*.html'];
  * Compilation of typescript files into javascript
  */
 gulp.task('tscompile', function () {
-    var tsProject = ts.createProject('./tsconfig.json', {
+    var tsProject = ts.createProject('tsconfig.json', {
         typescript: require('typescript')
     });
     var tsResult = tsProject.src(tsfiles)
@@ -37,8 +37,7 @@ gulp.task('jspm_bundle', ['tscompile'], function () {
         bundleSfx: true,
         bundles: [
             { src: './src/app/app.js', dst: 'bundle.min.js'}
-        ],
-        config: 'config.js'
+        ]
     })
     .pipe(gulp.dest('build/libs'))
 });
@@ -76,6 +75,10 @@ gulp.task("static_resources", ["index"], function () {
 /* get the index file to the root of the build */
 gulp.task("index", function(){
     return gulp.src(["src/index.html"])
+        .pipe(htmlreplace({
+            'js': ['libs/vender.js', 'libs/bundle.min.js', 'libs/config.js'],
+            'css': 'styles.css'
+        }))
         .pipe(gulp.dest("build"));
 });
 /* copy node server to build folder */

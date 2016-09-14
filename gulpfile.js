@@ -76,7 +76,7 @@ gulp.task("static_resources", ["index"], function () {
 gulp.task("index", function(){
     return gulp.src(["src/index.html"])
         .pipe(htmlreplace({
-            'js': ['libs/vender.js', 'libs/bundle.min.js', 'libs/config.js'],
+            'js': ['libs/vender.min.js', 'libs/bundle.min.js', 'libs/config.js'],
             'css': 'styles.css'
         }))
         .pipe(gulp.dest("build"));

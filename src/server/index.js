@@ -35,7 +35,11 @@ app.use(function(req, res, next){
         return next();
     }
 
-    fs.createReadStream(staticRoot + '../index.html').pipe(res);
+    if (process.env.ENV === 'PROD') {
+        fs.createReadStream(staticRoot + 'index.html').pipe(res);
+    } else {
+        fs.createReadStream(staticRoot + '../index.html').pipe(res);
+    }
 
 });
 

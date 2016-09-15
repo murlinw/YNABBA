@@ -21,28 +21,28 @@ app.use('/test', function(req,res,next) {
     res.send("Testing Server");
 });
 
-app.use(function(req, res, next){
+// app.use(function(req, res, next){
 
-    // if the request is not html then move along
-    var accept = req.accepts('html', 'json', 'xml');
-    if(accept !== 'html'){
-        return next();
-    }
+//     // if the request is not html then move along
+//     var accept = req.accepts('html', 'json', 'xml');
+//     if(accept !== 'html'){
+//         return next();
+//     }
 
-    // if the request has a '.' assume that it's for a file, move along
-    var ext = path.extname(req.path);
-    if (ext !== ''){
-        return next();
-    }
+//     // if the request has a '.' assume that it's for a file, move along
+//     var ext = path.extname(req.path);
+//     if (ext !== ''){
+//         return next();
+//     }
 
-    if (process.env.ENV === 'PROD') {
-        fs.createReadStream(staticRoot + 'index.html').pipe(res);
-    } else {
-        fs.createReadStream(staticRoot + '../index.html').pipe(res);
-    }
+//     if (process.env.ENV === 'PROD') {
+//         fs.createReadStream(staticRoot + 'index.html').pipe(res);
+//     } else {
+//         fs.createReadStream(staticRoot + '../index.html').pipe(res);
+//     }
 
-});
+// });
 
-app.listen(app.get('port'), function() {
-    console.log('app running on port', app.get('port'));
-});
+// app.listen(app.get('port'), function() {
+//     console.log('app running on port', app.get('port'));
+// });

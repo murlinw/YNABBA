@@ -11,8 +11,7 @@
     "npm": ">=3.0.0"
   },
   "scripts": {
-    "local-start": "tsc && concurrently \"tsc -w\" \"lite-server --c bs-config.json\" ",
-    "start": "node index.js ",
+    "start": "tsc && concurrently \"tsc -w\" \"lite-server --c bs-config.json\" ",
     "pree2e": "npm run webdriver:update",
     "e2e": "tsc && concurrently \"http-server -s\" \"protractor protractor.config.js\" --kill-others --success first",
     "lint": "tslint src/app/**/*.ts src/app/*.ts -t verbose",

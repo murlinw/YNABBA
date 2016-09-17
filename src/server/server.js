@@ -6,6 +6,18 @@ var compression = require('compression');
 var app = express();
 var staticRoot = __dirname + '/';
 
+var configSettings;
+try {
+    configSettings = require('./config.json')
+} catch (error) {
+
+} 
+
+/**
+ * Example database connections setting from config.json or environment variables
+ * var database_password = process.env.DATABASE || configSettings[DATABASE]
+ */
+
 app.set('port', (process.env.PORT || 3000));
 
 app.use(compression());

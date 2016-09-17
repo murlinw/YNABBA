@@ -45,3 +45,6 @@ typings
 # build folder
 build
 
+# config files
+src/server/config.json
+
